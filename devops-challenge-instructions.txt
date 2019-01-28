@@ -1,0 +1,25 @@
+Instructions
+- Navigate to `/opt/branch-challenge/`
+- Run `pipenv run python3 branch_orchestrate.py build` to build the
+  branchchallenge:latest Docker image
+- Run `pipenv run python3 branch_orchestrate.py start -c [1-5]` to start the
+  specified number of containers using the branchchallenge:latest Docker image
+- Run `pipenv run python3 branch_orchestrate.py delete` to tear everything down
+
+Challenges
+- I opted to go with HAProxy for my proxy service because I felt that it would
+  serve as a nice little learning experience with the tool, but in retrospect,
+  I feel like there are probably things out there that are more modern and
+  better suited to solving this problem more elegantly with less effort
+- I ended up using predetermined docker host ports with a static HAProxy config
+  file and server checks, but I wanted to implement a more elegant solution
+  using dynamic Docker host ports and a more fluid backend configuration. Here I
+  believe a more modern proxy service would have served me better than HAProxy
+- The solution I went with to provide the 404 response when no containers are
+  available feels very hacky to me; I basically hijacked the HAProxy 503 error
+  page and make it send the 404 with the requested HTML; I would have liked to
+  implement something cleaner here. I believe a more modern proxy service would
+  have served me better than HAProxy here as well.
+- There is a pipenv warning about Python versions that is a bit of an eyesore,
+  but I figured that it is not necessarily worth the time to remedy as it does
+  not impact the end result of the code.
