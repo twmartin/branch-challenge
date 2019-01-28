@@ -36,10 +36,10 @@ def start_containers(docker_client, container_count):
 
     index = 1 + len(existing_containers)
     while index <= container_count + len(existing_containers):
-        print('Starting container{index}'.format(index=index))
+        print('Starting container #{index}'.format(index=index))
         docker_client.containers.run(
             'branchchallenge:latest',
-            ports={'9090/tcp': None},
+            ports={'9090/tcp': '3277{index}'.format(index=index)},
             volumes={'/var/run/docker.sock': {'bind': '/var/run/docker.sock', 'mode': 'ro'}},
             detach=True
         )
