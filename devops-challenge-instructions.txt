@@ -15,8 +15,9 @@ Challenges
   file with server checks, but I wanted to implement a more elegant solution
   using dynamic Docker host ports and a more fluid backend configuration. Though
   this was not as elegant as I was hoping for, it accomplished the desired
-  outcome without a need to update the proxy config and reload the service. Here
-  I believe a more modern proxy service would have served me better than HAProxy
+  outcome without a need to update the proxy config and reload the service when
+  new containers came or went. Here I believe a more modern proxy service would
+  have served me better than HAProxy
 - The solution I went with to provide the 404 response when no containers are
   available feels very hacky to me; I basically hijacked the HAProxy 503 error
   page and make it send the 404 with the requested HTML; I would have liked to
